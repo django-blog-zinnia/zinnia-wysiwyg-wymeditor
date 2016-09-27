@@ -1,7 +1,6 @@
 """EntryAdmin for zinnia-wymeditor"""
 from django.forms import Media
 from django.conf.urls import url
-from django.conf.urls import patterns
 from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.utils.translation import get_language
@@ -32,12 +31,11 @@ class EntryAdminWYMEditorMixin(object):
         Overload the admin's urls for WYMEditor.
         """
         entry_admin_urls = super(EntryAdminWYMEditorMixin, self).get_urls()
-        urls = patterns(
-            '',
+        urls = [
             url(r'^wymeditor/$',
                 self.admin_site.admin_view(self.wymeditor),
                 name='zinnia_entry_wymeditor'),
-        )
+        ]
         return urls + entry_admin_urls
 
     def _media(self):
